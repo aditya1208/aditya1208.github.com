@@ -1,0 +1,116 @@
+<!--Initialize angular app -->
+<html ng-app="TodoApp">
+<head>
+	<title>Grocery List App</title>
+	<!--Necessary JS files -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="controllers.js"></script>
+	<style>
+		#footer {
+				  margin-left: -20px;
+				  margin-right: -20px;
+				  padding-left: 20px;
+				  padding-right: 20px;
+				}
+		
+		#footer {
+				  height: 60px;
+				}
+		#footer {
+				  background-color: #eee;
+				}
+		#wrap {
+				  min-height: 100%;
+				  height: auto !important;
+				  margin: 0 auto -60px;
+				}
+	</style>
+</head>
+<!--Define controller name -->
+<body ng-controller="GroceryCtrl">
+	<!--Search field -->
+	<div style="padding:20px 0px 60px 0px">
+		<span class="col-md-1" style="font-weight:bold">Search</span>
+		<span class="col-md-3">
+			<input type="text" class="form-control" ng-model="searchKeyword"/>
+		</span>
+	</div>
+	<!--Table display of ToDO list -->
+	<div id="wrap" style="padding-bottom:50px">
+		<table style="width:100%">
+			<tr>										
+				<td style="vertical-align: top">
+					<table class="table">
+						<tr>
+							<th>Item
+							</th>
+							<th>Quantity
+							</th>
+							<th>Store
+							</th>
+							<th>Action
+							</th>
+						</tr>
+						<!--Display of items from groceries -->
+						<tr ng-repeat="item in groceries | filter: searchKeyword">
+							<td>{{item.item}}
+							</td>
+							<td>{{item.quantity}}
+							</td>
+							<td>{{item.store}}
+							</td>
+							<td>
+							<!--Remove any item -->
+							<input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(item.item)"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<!--Add any items on the fly -->
+				<td style="width:50%;vertical-align: top;padding-left:100px;">
+					<div style="padding-bottom:20px;">
+						<h3 style="margin-top:0px">Add an Item</h3>
+					</div>
+					<form class="form-horizontal" role="form" ng-submit="addRow()">
+						<div class="form-group">
+							<label class="col-md-2 control-label">Item</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="item"
+									ng-model="item" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Quantity</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="quantity"
+										ng-model="quantity" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Store</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="store"
+										ng-model="store" />
+							</div>
+						</div>
+						<div class="form-group">								
+							<div style="padding-left:110px">
+								<input type="submit" value="Submit" class="btn btn-primary"/>
+							</div>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="footer">
+      <div class="container">
+        <p><b>DEMO Angular App by aditya1208</b></p>
+      </div>
+    </div>
+</body>
+	
+</html>
